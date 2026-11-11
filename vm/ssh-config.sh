@@ -4,7 +4,7 @@
 # Usage: vm/ssh-config.sh <host-alias-or-ip> [host-user]  >> ~/.ssh/config
 source "$(dirname "$0")/../lib/common.sh"
 
-jump="${1:-tiny}"
+jump="${1:-lab-host}"
 jump_user="${2:-${USER}}"
 
 cat <<EOF

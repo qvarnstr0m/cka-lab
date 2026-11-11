@@ -3,7 +3,7 @@ SHELL := /usr/bin/env bash
 
 NAME ?=
 E ?=
-JUMP ?= tiny
+JUMP ?= lab-host
 
 EXERCISE_DIR = exercises/$(E)
 
@@ -33,7 +33,7 @@ vms: ## Create the cluster VMs (cp, worker1, worker2)
 destroy: ## Destroy all VMs, snapshots and disks
 	./vm/destroy.sh
 
-ssh-config: ## Print an ~/.ssh/config block for your own computer (JUMP=tiny)
+ssh-config: ## Print an ~/.ssh/config block for your own computer (JUMP=lab-host)
 	@./vm/ssh-config.sh $(JUMP)
 
 ## --- Cluster ------------------------------------------------------------

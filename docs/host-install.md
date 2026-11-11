@@ -1,12 +1,15 @@
 # Installing the host
 
-The host is the Lenovo Tiny running **Ubuntu Server LTS**, headless, reached
-over SSH. Everything else (VMs, cluster) is created by the repo's scripts.
+The host is any x86_64 machine running **Ubuntu Server LTS**, headless and
+reached over SSH. Everything else (VMs, cluster) is created by the repo's
+scripts. The examples call it `lab-host` at `192.168.1.20` — use your own
+name and address.
 
-## 1. BIOS
+## 1. BIOS/UEFI
 
-- Enable **Intel VT-x** (and VT-d if present).
-- Set the machine to power on after power loss, if you want it always-on.
+- Enable hardware virtualization: **Intel VT-x** (often "Virtualization
+  Technology") or **AMD-V** ("SVM Mode"). Enable VT-d / AMD-Vi if present.
+- Optional: set the machine to power on after power loss, for an always-on lab.
 
 ## 2. Install Ubuntu Server
 
@@ -20,8 +23,9 @@ over SSH. Everything else (VMs, cluster) is created by the repo's scripts.
 
 ## 3. Fixed IP
 
-Either reserve an address for the Tiny in your router's DHCP (simplest), or
-set it statically in netplan, e.g. `/etc/netplan/50-cloud-init.yaml`:
+Either reserve an address for the host in your router's DHCP (simplest), or
+set it statically in netplan, e.g. `/etc/netplan/50-cloud-init.yaml`.
+Replace `eno1` with your interface name (`ip link`):
 
 ```yaml
 network:
@@ -50,7 +54,7 @@ ssh-copy-id you@192.168.1.20      # if the key wasn't imported during install
 `~/.ssh/config` on your computer:
 
 ```text
-Host tiny
+Host lab-host
   HostName 192.168.1.20
   User you
 ```
@@ -70,6 +74,10 @@ sudo apt install -y unattended-upgrades git make
 ```bash
 git clone <this repo> && cd cka-lab
 make host
+make check
 ```
 
-Connect VS Code with Remote-SSH to `tiny` to edit the repo there.
+Connect VS Code with Remote-SSH to `lab-host` to edit the repo there.
+
+If you use a different SSH alias, pass it when generating the node config:
+`make ssh-config JUMP=<alias>`.

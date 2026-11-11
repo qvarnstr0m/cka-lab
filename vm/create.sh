@@ -9,8 +9,8 @@ command -v envsubst >/dev/null || die "envsubst missing (apt install gettext-bas
 [[ -f "${SSH_PUBKEY_FILE}" ]] || die "no SSH public key at ${SSH_PUBKEY_FILE}"
 virsh net-info "${NET_NAME}" &>/dev/null || die "network ${NET_NAME} missing, run host/network.sh"
 
-base_img="${IMAGE_DIR}/base-${UBUNTU_RELEASE}.img"
-base_url="https://cloud-images.ubuntu.com/${UBUNTU_RELEASE}/current/${UBUNTU_RELEASE}-server-cloudimg-amd64.img"
+base_img="${IMAGE_DIR}/base-${UBUNTU_RELEASE}-${UBUNTU_ARCH}.img"
+base_url="https://cloud-images.ubuntu.com/${UBUNTU_RELEASE}/current/${UBUNTU_RELEASE}-server-cloudimg-${UBUNTU_ARCH}.img"
 
 if [[ ! -f "${base_img}" ]]; then
   log "Downloading ${UBUNTU_RELEASE} cloud image"

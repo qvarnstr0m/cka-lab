@@ -1,8 +1,8 @@
 # cka-lab
 
 A home lab for the **Certified Kubernetes Administrator (CKA)** exam: a real
-multi-node kubeadm cluster in KVM virtual machines on a single small machine
-(a Lenovo Tiny with 32 GB RAM), plus setup scripts and exam-style exercises.
+multi-node kubeadm cluster in KVM virtual machines on a single machine, plus
+setup scripts and exam-style exercises.
 
 Local tools like kind, k3d and minikube are great for daily `kubectl`
 practice, but they can't cover the parts of the CKA that need real nodes:
@@ -11,10 +11,18 @@ troubleshooting kubelet and static pods over SSH. This lab can.
 
 ## Requirements
 
-- A machine with VT-x/AMD-V and ~16 GB+ RAM (32 GB recommended)
+- An **x86_64** machine with hardware virtualization (Intel VT-x or AMD-V)
+  enabled, running on bare metal — or a VM with nested virtualization
+- **16 GB RAM** minimum (32 GB recommended) and ~100 GB free disk
 - **Ubuntu Server LTS** on the host, installed with the OpenSSH server
   ([docs/host-install.md](docs/host-install.md))
-- The VMs run Ubuntu Server LTS cloud images under libvirt/KVM
+
+The cluster VMs run Ubuntu Server LTS cloud images under libvirt/KVM. VM sizes
+are set in `config/cluster.env`; lower them to fit a smaller machine. A Mac
+can't be the host (no KVM), but works fine as the computer you connect from.
+
+**Reference setup:** Lenovo ThinkCentre Tiny, 32 GB RAM, headless — small,
+quiet and low-power, with room for 3–5 VMs.
 
 ## Quick start
 
@@ -39,7 +47,7 @@ From your own computer, add the SSH config so you can reach the nodes through
 the host with `ProxyJump`:
 
 ```bash
-ssh tiny 'cd cka-lab && make ssh-config JUMP=tiny' >> ~/.ssh/config
+ssh lab-host 'cd cka-lab && make ssh-config JUMP=lab-host' >> ~/.ssh/config
 ssh cp
 ```
 
