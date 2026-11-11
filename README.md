@@ -51,7 +51,9 @@ ssh lab-host 'cd cka-lab && make ssh-config JUMP=lab-host' >> ~/.ssh/config
 ssh cp
 ```
 
-Editing works well with VS Code Remote-SSH connected to the host.
+Editing works well with VS Code Remote-SSH connected to the host. To work on
+the lab away from home, see [docs/remote-access.md](docs/remote-access.md)
+(Tailscale).
 
 ## Layout
 

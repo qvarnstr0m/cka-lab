@@ -81,3 +81,6 @@ Connect VS Code with Remote-SSH to `lab-host` to edit the repo there.
 
 If you use a different SSH alias, pass it when generating the node config:
 `make ssh-config JUMP=<alias>`.
+
+To reach the host from outside your home network, set up Tailscale:
+[remote-access.md](remote-access.md).
