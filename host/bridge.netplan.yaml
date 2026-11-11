@@ -1,0 +1,26 @@
+# Optional: bridge the host NIC so VMs can sit directly on the home network.
+# Not needed for the default setup (libvirt NAT + ProxyJump).
+#
+# 1. Replace eno1 with your interface (ip link) and the addresses with yours.
+# 2. sudo cp host/bridge.netplan.yaml /etc/netplan/60-bridge.yaml
+#    sudo chmod 600 /etc/netplan/60-bridge.yaml
+# 3. sudo netplan try   (rolls back automatically if you lose SSH)
+#
+# Remove the host's existing config for eno1 so it isn't configured twice.
+network:
+  version: 2
+  ethernets:
+    eno1:
+      dhcp4: false
+  bridges:
+    br0:
+      interfaces: [eno1]
+      addresses: [192.168.1.20/24]
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [192.168.1.1]
+      parameters:
+        stp: false
+        forward-delay: 0

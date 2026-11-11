@@ -1,0 +1,2 @@
+# Scripts source lib/common.sh via a path computed at runtime
+disable=SC1091

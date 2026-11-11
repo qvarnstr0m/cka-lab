@@ -1,0 +1,29 @@
+# Local lab state: kubeconfig, known_hosts, join tokens
+.lab/
+
+# Kubernetes credentials
+kubeconfig
+*.kubeconfig
+admin.conf
+*.token
+join-command*
+
+# Certificates and keys
+*.crt
+*.key
+*.pem
+*.csr
+
+# etcd snapshots from exercises
+*.db
+
+# VM images
+*.img
+*.qcow2
+*.iso
+
+# Editors / OS
+.DS_Store
+.vscode/
+*.swp
+node_modules/
