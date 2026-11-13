@@ -8,7 +8,7 @@ check() { if "$@"; then echo "  ok   $desc"; else echo "  FAIL $desc"; fail=1; f
 desc="/dev/kvm exists";            check test -e /dev/kvm
 desc="kvm-ok";                     check sudo kvm-ok >/dev/null
 desc="libvirtd is active";         check systemctl is-active --quiet libvirtd
-desc="${USER} in libvirt group";   check id -nG "${USER}" | grep -qw libvirt
+desc="${USER} in libvirt group";   check grep -qw libvirt <<<"$(id -nG "${USER}")"
 desc="SSH key ${SSH_PUBKEY_FILE}"; check test -f "${SSH_PUBKEY_FILE}"
 
 need_mem=$(( CP_MEMORY + WORKER_MEMORY * (${#NODES[@]} - 1) ))
