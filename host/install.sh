@@ -7,7 +7,7 @@ source "$(dirname "$0")/../lib/common.sh"
 log "Installing packages"
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends \
-  qemu-kvm qemu-utils libvirt-daemon-system libvirt-clients \
+  qemu-system-x86 qemu-utils libvirt-daemon-system libvirt-clients \
   virtinst cloud-image-utils cpu-checker \
   make jq curl openssh-client gettext-base
 
